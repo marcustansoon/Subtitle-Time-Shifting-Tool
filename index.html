@@ -25,5 +25,14 @@ Number of seconds to be shifted (can be positive or negative)
 
 <script src=script.js>
 </script>
+  
+  <?php
+$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$txt = "John Doe\n";
+fwrite($myfile, $txt);
+$txt = "Jane Doe\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+?>
 </body>
 </html>
