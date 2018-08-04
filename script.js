@@ -54,6 +54,7 @@
             {
             	if (Get_Subtitles_Text[loop+2]==':' && Get_Subtitles_Text[loop+3+2]==':' && Get_Subtitles_Text[loop+17+2]==':' && Get_Subtitles_Text[loop+20+2]==':')
                 {
+			temp+="</font>";
                 	hour_temp1 = parseInt( Get_Subtitles_Text[loop-2+2]+Get_Subtitles_Text[loop-1+2] );
                     
                     min_temp1 = parseInt( Get_Subtitles_Text[loop+1+2]+Get_Subtitles_Text[loop+2+2] );
@@ -207,7 +208,7 @@
                  
                   	temp+=hour_temp1 + ':' + min_temp1 + ':' + second_temp1 + Get_Subtitles_Text[loop+8] + Get_Subtitles_Text[loop+9] + Get_Subtitles_Text[loop+10]+ Get_Subtitles_Text[loop+11] +" --> " + hour_temp2 + ':' + min_temp2 + ':' + second_temp2  ;
                    
-                   
+                   	temp+="<font size='1000px'>";
                    loop+=24;
                 }
                 else
