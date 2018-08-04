@@ -26,7 +26,7 @@
         function convert()
         {
         	let shifting_value=document.getElementById('ShiftingValueInSeconds').value,
-            getFontSize=document.getElementById('fontsize').value,
+            getFontSize=document.getElementById('fontsize').value, openFontIndex=0,closeFont_bool=false,totalSubtitleIndex=0;
             
         	temp="",
             
@@ -263,4 +263,4 @@
         renderer.render(container);
         
     }
-let openFontIndex=0,closeFont_bool=false,totalSubtitleIndex=0;
+
