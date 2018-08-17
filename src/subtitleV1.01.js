@@ -231,7 +231,7 @@
                 	if (openFontIndex==0)//check if the index for inserting '<font....>' has reached
                     {
                     	//console.log(Get_Subtitles_Text[loop]);
-                        temp+="<font size='"+getFontSize+"px'>";closeFont_bool=true;//if so, insert it and set closeFont to true;
+                        temp+="<font color="#FFFF00" /*size='"+getFontSize+"px'*/>";closeFont_bool=true;//if so, insert it and set closeFont to true;
                         //console.log(!isNaN(parseInt('23')));
                         
                     }
