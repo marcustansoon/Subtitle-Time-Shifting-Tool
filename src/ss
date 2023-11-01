@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<textarea id="textarea" rows="10" cols="50"></textarea>
+<br>Milliseconds
+<input placeholder="1000" id="userInput">
+<br>
+<button onclick="run();">Run</button>
+
+<script>
+
+const bothPatterns = /^[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}\s\-\-\>\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/i;
+const singlePattern = /[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/g
+
+function deconstructValues(string) {
+	let totalSeconds = 0, totalMilliseconds = 0;
+    
+		// Hours (+3600)
+        totalSeconds += (parseInt(string[0]) * 10 + parseInt(string[1])) * 3600
+        
+        // Minutes (+60)
+        totalSeconds += (parseInt(string[3]) * 10 + parseInt(string[4])) * 60
+           
+        // Seconds (+)
+        totalSeconds += (parseInt(string[6]) * 10 + parseInt(string[7])) * 1
+           
+        // MilliSeconds (+)
+        totalMilliseconds += parseInt(string[9]) * 100 + parseInt(string[10]) * 10 + parseInt(string[11]) * 1
+        
+	return {'s' : totalSeconds, 'ms': totalMilliseconds};
+}
+
+function constructValues(seconds, milliseconds) {
+	let string = '', temp = 0;
+    // Hours
+    temp = (seconds / 3600 / 10) << 0
+    string += temp % 10;
+    seconds -= temp * 3600 * 10
+    
+    temp = (seconds / 3600 / 1) << 0
+    string += temp % 10;
+    seconds -= temp * 3600 * 1
+    
+    // Minutes
+    string += ':'
+    temp += (seconds / 60 / 10) << 0
+    string += temp % 10;
+    seconds -= temp * 60 * 10
+    
+    temp = (seconds / 60 / 1) << 0
+    string += temp % 10;
+    seconds -= temp * 60 * 1
+    
+    // Seconds
+    string += ':'
+    temp = (seconds / 10) << 0
+    string += temp % 10;
+    seconds -= temp * 10
+    
+    temp = (seconds) << 0
+    string += temp % 10;
+    seconds -= temp
+    
+    // Milliseconds
+    string += ','
+    string += milliseconds.toString().padStart(3, '0')
+    
+    return string;
+}
+
+function run(){
+let userInput = document.getElementById('userInput').value;
+userInput = parseInt(userInput) >> 0;
+
+let string = document.getElementById('textarea').value;
+let array = string.split("\n");
+
+  for(let loop = 0; loop <= array.length; loop++){
+  		// Contains 'from' and 'to' timeframe
+        let results = array[loop].match(singlePattern);
+      if(array[loop].match(bothPatterns) && results.length === 2){
+      		
+           // Extract 'from' timeframe
+           let from = deconstructValues(results[0])
+           let milliSecondsToBeAdded = userInput - ((userInput / 1000) << 0) * 1000
+           let secondsToBeAdded = ((userInput / 1000) << 0)
+           
+            from.ms += milliSecondsToBeAdded
+            if(from.ms >= 1000){
+            	from.ms -= 1000;
+                from.s++;
+            }
+          	from.s += secondsToBeAdded
+           
+           // Modify 'from' timeframe
+           results[0] = constructValues(from.s, from.ms);
+           
+           // Extract 'to' timeframe
+           let to = deconstructValues(results[1])
+           
+            to.ms += milliSecondsToBeAdded
+            if(to.ms >= 1000){
+            	to.ms -= 1000;
+                to.s++;
+            }
+          	from.s += secondsToBeAdded
+         	
+            // Modify 'to' timeframe
+           results[1] = constructValues(to.s, to.ms);
+           
+           
+           array[loop] = results[0] + ' --> ' + results[1];
+      }
+      
+      console.log(array[loop])
+  }
+}
+</script>
+
+</body>
+</html>
+
