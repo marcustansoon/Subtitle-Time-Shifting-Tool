@@ -7,17 +7,17 @@
 
 <textarea id="textarea" rows="10" cols="50"></textarea>
 <br>Milliseconds
-<input placeholder="1000" id="userInput">
+<input placeholder="1000" id="userInput" type="number" name="userInput" min="-100000" max="100000">
 <br>
 <button onclick="run();">Run</button>
 
 <script>
 
-const bothPatterns = /^[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}\s\-\-\>\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/i;
+const bothPatterns = /^[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}\s\-\-\>\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/i
 const singlePattern = /[0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/g
 
 function deconstructValues(string) {
-	let totalSeconds = 0, totalMilliseconds = 0;
+	let totalSeconds = 0, totalMilliseconds = 0
     
 		// Hours (+3600)
         totalSeconds += (parseInt(string[0]) * 10 + parseInt(string[1])) * 3600
@@ -31,57 +31,57 @@ function deconstructValues(string) {
         // MilliSeconds (+)
         totalMilliseconds += parseInt(string[9]) * 100 + parseInt(string[10]) * 10 + parseInt(string[11]) * 1
         
-	return {'s' : totalSeconds, 'ms': totalMilliseconds};
+	return {'s' : totalSeconds, 'ms': totalMilliseconds}
 }
 
 function constructValues(seconds, milliseconds) {
-	let string = '', temp = 0;
+	let string = '', temp = 0
     // Hours
     temp = (seconds / 3600 / 10) << 0
-    string += temp % 10;
+    string += temp % 10
     seconds -= temp * 3600 * 10
     
     temp = (seconds / 3600 / 1) << 0
-    string += temp % 10;
+    string += temp % 10
     seconds -= temp * 3600 * 1
     
     // Minutes
     string += ':'
-    temp += (seconds / 60 / 10) << 0
-    string += temp % 10;
+    temp = (seconds / 60 / 10) << 0
+    string += temp % 10
     seconds -= temp * 60 * 10
     
     temp = (seconds / 60 / 1) << 0
-    string += temp % 10;
+    string += temp % 10
     seconds -= temp * 60 * 1
     
     // Seconds
     string += ':'
     temp = (seconds / 10) << 0
-    string += temp % 10;
+    string += temp % 10
     seconds -= temp * 10
     
     temp = (seconds) << 0
-    string += temp % 10;
+    string += temp % 10
     seconds -= temp
     
     // Milliseconds
     string += ','
     string += milliseconds.toString().padStart(3, '0')
     
-    return string;
+    return string
 }
 
 function run(){
 let userInput = document.getElementById('userInput').value;
-userInput = parseInt(userInput) >> 0;
+userInput = parseInt(userInput) >> 0
 
-let string = document.getElementById('textarea').value;
-let array = string.split("\n");
+let string = document.getElementById('textarea').value
+let array = string.split("\n")
 
   for(let loop = 0; loop <= array.length; loop++){
   		// Contains 'from' and 'to' timeframe
-        let results = array[loop].match(singlePattern);
+        let results = array[loop].match(singlePattern)
       if(array[loop].match(bothPatterns) && results.length === 2){
       		
            // Extract 'from' timeframe
@@ -91,29 +91,29 @@ let array = string.split("\n");
            
             from.ms += milliSecondsToBeAdded
             if(from.ms >= 1000){
-            	from.ms -= 1000;
-                from.s++;
+            	from.ms -= 1000
+                from.s++
             }
           	from.s += secondsToBeAdded
            
            // Modify 'from' timeframe
-           results[0] = constructValues(from.s, from.ms);
+           results[0] = constructValues(from.s, from.ms)
            
            // Extract 'to' timeframe
            let to = deconstructValues(results[1])
            
             to.ms += milliSecondsToBeAdded
             if(to.ms >= 1000){
-            	to.ms -= 1000;
-                to.s++;
+            	to.ms -= 1000
+                to.s++
             }
           	from.s += secondsToBeAdded
          	
             // Modify 'to' timeframe
-           results[1] = constructValues(to.s, to.ms);
+           results[1] = constructValues(to.s, to.ms)
            
-           
-           array[loop] = results[0] + ' --> ' + results[1];
+           // Set result
+           array[loop] = results[0] + ' --> ' + results[1]
       }
       
       console.log(array[loop])
