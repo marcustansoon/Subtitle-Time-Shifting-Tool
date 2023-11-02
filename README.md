@@ -7,7 +7,7 @@ A free online tool that allow you to edit your subtitles' timing in order to syn
 <br>**Functionality :-**
 - Allow upload of subtitles file in .srt format and direct adjustment of the timing and font size
 
-<br>**Help Tool used :-**
+<br>**Help Tools used :-**
 - https://play.tailwindcss.com/ 
 - https://flowbite.com/
 #### Try out the tool here :-
