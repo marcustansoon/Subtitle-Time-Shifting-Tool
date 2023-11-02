@@ -4,10 +4,13 @@ A free online tool that allow you to edit your subtitles' timing in order to syn
 1. Paste in the subtitles' content into the textarea provided
 2. Type in the delay value for altering the subtitles timing, can be either positive,+ or negative,- value. The time must be expressed in term of seconds.
 
-<br>**Further Functionality :-**
+<br>**Functionality :-**
 - Allow upload of subtitles file in .srt format and direct adjustment of the timing and font size
 
+<br>**Help Tool used :-**
+- https://play.tailwindcss.com/ 
+- https://flowbite.com/
 #### Try out the tool here :-
 https://marcustansoon.github.io/Subtitle-Time-Shifting-Tool/
 OR
-https://www.w3schools.com/code/tryit.asp?filename=FTXMORYMT8N4
+https://jsfiddle.net/sj5atvzw/7/show
