@@ -13,4 +13,4 @@ A free online tool that allow you to edit your subtitles' timing in order to syn
 #### Try out the tool here :-
 https://marcustansoon.github.io/Subtitle-Time-Shifting-Tool/
 OR
-https://jsfiddle.net/sj5atvzw/7/show
+https://jsfiddle.net/L9036w7p/show
